@@ -1,6 +1,6 @@
 .header {
   width: 1184px;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   width: 661px;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   padding: 10px 0;
 }
 
