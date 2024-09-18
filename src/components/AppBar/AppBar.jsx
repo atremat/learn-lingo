@@ -1,7 +1,30 @@
 import styles from './AppBar.module.css';
+import flag from '/flag.svg';
+import { NavLink } from 'react-router-dom';
+import { AuthNav } from '../AuthNav/AuthNav';
 
 const AppBar = () => {
-  return <header className={styles.header}>AppBar</header>;
+  return (
+    <header className={styles.header}>
+      <div className={styles.mainContainer}>
+        <div className={styles.logoContainer}>
+          <img src={flag} alt="Flag of Ukraine" className={styles.logo} />
+          <span className={styles.logoName}>LearnLingo</span>
+        </div>
+
+        <nav className={styles.nav}>
+          <NavLink to="/" className={styles.link}>
+            Home
+          </NavLink>
+          <NavLink to="/teachers" className={styles.link}>
+            Teachers
+          </NavLink>
+        </nav>
+      </div>
+
+      <AuthNav />
+    </header>
+  );
 };
 
 export default AppBar;

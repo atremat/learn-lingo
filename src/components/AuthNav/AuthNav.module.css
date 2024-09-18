@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loginText {
+}
+
+.registerButton {
+  color: var(--white-color, white);
+  background-color: var(--black-color, black);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 14px 39px;
+  border-radius: 12px;
+  width: 166px;
+}
