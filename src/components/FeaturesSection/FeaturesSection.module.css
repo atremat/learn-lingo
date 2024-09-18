@@ -1,0 +1,35 @@
+.section {
+  border: 1.5px dashed var(--primary-color, yellow);
+  border-radius: 30px;
+  width: 1312px;
+  height: 116px;
+}
+
+.list {
+  display: flex;
+  gap: 100px;
+  padding: 40px 122px;
+  /* width: 1067px; */
+  justify-content: space-between;
+}
+
+.item {
+  display: flex;
+  gap: 16px;
+}
+
+.quantity {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.02em;
+  color: var(--black-color, black);
+  text-wrap: nowrap;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}
