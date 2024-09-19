@@ -1,7 +1,16 @@
 import styles from './TeachersPage.module.css';
+import teachers from '../../data/teachers.json';
+import FiltersBar from '../../components/FiltersBar/FiltersBar';
+import TeachersList from '../../components/TeachersList/TeachersList';
 
 const TeachersPage = () => {
-  return <div>TeachersPage</div>;
+  return (
+    <main className={styles.main}>
+      <FiltersBar />
+
+      <TeachersList teachers={teachers} />
+    </main>
+  );
 };
 
 export default TeachersPage;

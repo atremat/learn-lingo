@@ -2,7 +2,7 @@
   border-radius: 30px;
   width: 720px;
   height: 530px;
-  background: var(--gray-color, gray);
+  background: var(--lightgray-color, gray);
   padding: 98px 64px;
 }
 

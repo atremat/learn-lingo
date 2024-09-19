@@ -5,13 +5,16 @@
   --black-color: #121417;
   --green-color: #38cd3e;
   --white-color: #fff;
-  --gray-color: #f8f8f8;
+  --lightgray-color: #f8f8f8;
+  --gray-color: #8a8a89;
+  --bg-color: #eeeeee;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-style: normal;
+  background-color: var(--bg-color, gray);
 }
 
 h1,
