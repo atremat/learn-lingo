@@ -2,7 +2,7 @@
   border-radius: 24px;
   padding: 24px;
   width: 1184px;
-  height: 328px;
+  /* height: 328px; */
   background: var(--white-color, white);
   padding: 24px;
   margin: 0 auto;
@@ -155,4 +155,58 @@
 .levelsItem:first-child {
   background: var(--primary-color, yellow);
   border: none;
+}
+
+.experienceText {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black-color, black);
+  margin-bottom: 32px;
+}
+
+.reviewsList {
+  outline: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.reviewItem {
+  outline: 1px solid red;
+}
+
+.iconReviewWrapper {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.iconReviewNameWrapper {
+}
+
+.reviewName {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray-color);
+  margin-bottom: 2px;
+}
+
+.reviewStarWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.reviewText {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black-color, black);
+}
+
+.sad {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: var(--black-color, black);
 }

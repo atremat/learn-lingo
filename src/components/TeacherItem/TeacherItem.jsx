@@ -91,22 +91,62 @@ const TeacherItem = ({ teacher }) => {
 
           <p className={styles.criterion}>
             Conditions:{' '}
-            <span className={styles.criterionLang}>
+            <span className={styles.criterionText}>
               {teacher.conditions.join(' ')}
             </span>
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={toggleReadMore}
-          className={styles.readMoreBtn}
-        >
-          {!isExpanded && 'Read more'}
-        </button>
+        {!isExpanded && (
+          <button
+            type="button"
+            onClick={toggleReadMore}
+            className={styles.readMoreBtn}
+          >
+            Read more
+          </button>
+        )}
 
         {isExpanded && (
-          <div className="more-info">{/* <p>{teacher.fullInfo}</p> */}</div>
+          <div className="more-info">
+            <p className={styles.experienceText}>{teacher.experience}</p>
+
+            <ul className={styles.reviewsList}>
+              {teacher.reviews.map((review, id) => (
+                <li key={id} className={styles.reviewItem}>
+                  <div className={styles.iconReviewWrapper}>
+                    <div
+                      style={{
+                        width: '44px',
+                        height: '44px',
+                        border: '1px solid red',
+                        borderRadius: '50%',
+                      }}
+                    ></div>
+
+                    <div className={styles.iconReviewNameWrapper}>
+                      <p className={styles.reviewName}>
+                        {review['reviewer_name']}
+                      </p>
+
+                      <div className={styles.reviewStarWrapper}>
+                        <Icon
+                          id="star"
+                          width={16}
+                          height={16}
+                          className={styles.starIcon}
+                          fillColor="#ffc531"
+                        />
+
+                        {parseInt(review['reviewer_rating']).toFixed(1)}
+                      </div>
+                    </div>
+                  </div>
+                  <p className={styles.reviewText}>{review.comment}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         <ul className={styles.levelsList}>
