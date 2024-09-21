@@ -34,7 +34,6 @@
 }
 
 .container {
-  outline: 1px solid red;
   width: 968px;
 }
 
@@ -101,7 +100,6 @@
 }
 
 .teacherInfo {
-  outline: 1px solid red;
   margin-bottom: 16px;
 }
 
@@ -137,7 +135,6 @@
 
 .levelsList {
   margin-top: 32px;
-  outline: 1px solid red;
   display: flex;
   gap: 8px;
 }
@@ -165,20 +162,23 @@
 }
 
 .reviewsList {
-  outline: 1px solid red;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
 .reviewItem {
-  outline: 1px solid red;
 }
 
 .iconReviewWrapper {
   margin-bottom: 16px;
   display: flex;
   gap: 12px;
+}
+
+.reviewAvatar {
+  width: 44px;
+  height: 44px;
 }
 
 .iconReviewNameWrapper {
@@ -208,5 +208,17 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.28571;
+  color: var(--black-color, black);
+}
+
+.bookBtn {
+  margin-top: 32px;
+  border-radius: 12px;
+  padding: 16px 48px;
+
+  background: var(--primary-color, yellow);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
   color: var(--black-color, black);
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Icon from '../Icon/Icon';
 import styles from './TeacherItem.module.css';
 import book from '/book.svg';
+import defaultAvatar from '/user.png';
 
 const TeacherItem = ({ teacher }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -115,14 +116,11 @@ const TeacherItem = ({ teacher }) => {
               {teacher.reviews.map((review, id) => (
                 <li key={id} className={styles.reviewItem}>
                   <div className={styles.iconReviewWrapper}>
-                    <div
-                      style={{
-                        width: '44px',
-                        height: '44px',
-                        border: '1px solid red',
-                        borderRadius: '50%',
-                      }}
-                    ></div>
+                    <img
+                      src={defaultAvatar}
+                      alt="avatar"
+                      className={styles.reviewAvatar}
+                    />
 
                     <div className={styles.iconReviewNameWrapper}>
                       <p className={styles.reviewName}>
@@ -156,6 +154,16 @@ const TeacherItem = ({ teacher }) => {
             </li>
           ))}
         </ul>
+
+        {isExpanded && (
+          <button
+            type="button"
+            className={styles.bookBtn}
+            onClick={() => console.log('booked!')}
+          >
+            Book trial lesson
+          </button>
+        )}
       </section>
     </li>
   );
