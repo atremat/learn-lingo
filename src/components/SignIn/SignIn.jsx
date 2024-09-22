@@ -1,57 +1,94 @@
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import styles from './SignIn.module.css';
+import { useId, useState } from 'react';
+import clsx from 'clsx';
 import Icon from '../Icon/Icon';
-import ModalWindow from '../ModalWindow/ModalWindow';
-import css from './PopUp.module.css';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import { PopUpAddInfo } from '../PopUpAddInfo/PopUpAddInfo';
+import eyeIcon from '/eye.svg';
 
-const SingIn = ({ modalIsOpen, onCloseModal, children }) => {
+const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+
+const minPasswordLength = 8;
+const maxPasswordLength = 32;
+
+const signInSchema = yup.object({
+  email: yup
+    .string()
+    .required('Email is required!')
+    .matches(emailRegExp, 'Email address is not valid')
+    .email('Please enter a valid email address!'),
+
+  password: yup
+    .string()
+    .required('Password is required!')
+    .min(minPasswordLength, 'Too short')
+    .max(maxPasswordLength, 'Too long'),
+});
+
+const SingIn = () => {
+  const [isPassword, setIsPassword] = useState(true);
+
+  const emailId = useId();
+  const passwordId = useId();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
+
+  const togglePassword = () => setIsPassword(!isPassword);
+
+  const onSubmit = data => {
+    console.log('Дані форми:', data);
+  };
+
   return (
-    <ModalWindow modalIsOpen={modalIsOpen} onCloseModal={onCloseModal}>
-      <div className={css.container}>
-        <h3 className={css.name}>{item.name}</h3>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Log In</h2>
+      <p className={styles.text}>
+        Welcome back! Please enter your credentials to access your account and
+        continue your search for an teacher.
+      </p>
 
-        <div className={css.ratingWrapper}>
-          <Icon
-            id="star-empty"
-            className={css.star}
-            width={16}
-            height={16}
-            fillColor="#ffc531"
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <input
+          id={emailId}
+          {...register('email')}
+          placeholder="Email"
+          className={clsx(styles.input, styles.email)}
+        />
+        <p className={styles.errorText}>{errors.email?.message}</p>
+
+        <div className={styles.passwordWrapper}>
+          <input
+            id={passwordId}
+            type={isPassword ? 'password' : 'text'}
+            {...register('password', { required: true })}
+            placeholder="Password"
+            className={clsx(styles.input, styles.password)}
           />
 
-          <p
-            className={css.rating}
-          >{`${item.rating} (${item.reviews.length} Reviews)`}</p>
-          <p className={location}>
-            <Icon
-              id="geo"
-              width={16}
-              height={16}
-              className={css.locationIcon}
-            />
-            {item.location}
-          </p>
+          <button
+            type="button"
+            onClick={togglePassword}
+            className={styles.eyeBtn}
+          >
+            <img src={eyeIcon} alt="eye" className={styles.eye} />
+          </button>
         </div>
 
-        <h3 className={css.price}>€ {item.price.toFixed(2)}</h3>
-        <PerfectScrollbar className={css.scrollContainer}>
-          <ul className={css.list}>
-            {item.gallery.map((image, idx) => {
-              return (
-                <li key={idx} className={css.item}>
-                  <img src={image} className={css.photo} />
-                </li>
-              );
-            })}
-          </ul>
+        {errors.password && <span>This field is required</span>}
 
-          <p className={css.aboutText}>{item.description}</p>
-
-          <PopUpAddInfo item={item} />
-        </PerfectScrollbar>
-      </div>
-    </ModalWindow>
+        <button type="submit" className={styles.submitBtn}>
+          Log In
+        </button>
+      </form>
+    </div>
   );
 };
 
