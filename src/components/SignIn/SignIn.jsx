@@ -56,13 +56,15 @@ const SingIn = () => {
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <input
-          id={emailId}
-          {...register('email')}
-          placeholder="Email"
-          className={clsx(styles.input, styles.email)}
-        />
-        <p className={styles.errorText}>{errors.email?.message}</p>
+        <div className={styles.emailWrapper}>
+          <input
+            id={emailId}
+            {...register('email')}
+            placeholder="Email"
+            className={clsx(styles.input, styles.email)}
+          />
+          <p className={styles.errorText}>{errors.email?.message}</p>
+        </div>
 
         <div className={styles.passwordWrapper}>
           <input
@@ -78,11 +80,22 @@ const SingIn = () => {
             onClick={togglePassword}
             className={styles.eyeBtn}
           >
-            <img src={eyeIcon} alt="eye" className={styles.eye} />
+            {isPassword ? (
+              <img src={eyeIcon} alt="eye" className="eye" />
+            ) : (
+              <Icon
+                id="eye"
+                width={20}
+                height={20}
+                className={styles.eye}
+                fillColor="#121417"
+              />
+            )}
           </button>
+          {errors.password && (
+            <p className={styles.errorText}>{errors.password?.message}</p>
+          )}
         </div>
-
-        {errors.password && <span>This field is required</span>}
 
         <button type="submit" className={styles.submitBtn}>
           Log In

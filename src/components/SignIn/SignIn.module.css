@@ -53,8 +53,9 @@
   color: #121417;
 }
 
-.email {
+.emailWrapper {
   margin-bottom: 18px;
+  position: relative;
 }
 
 .eyeBtn {
@@ -63,5 +64,9 @@
   right: 17px;
 }
 
-.eye {
+.errorText {
+  position: absolute;
+  left: 0;
+  bottom: -18px;
+  color: red;
 }
