@@ -6,6 +6,10 @@ import { useId, useState } from 'react';
 import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import eyeIcon from '/eye.svg';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../config/firebase';
+import { setDoc, doc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -46,8 +50,33 @@ const SignUp = () => {
 
   const togglePassword = () => setIsPassword(!isPassword);
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log('Дані форми:', data);
+
+    try {
+      //creatte new user
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      //get user info
+      const user = auth.currentUser;
+      console.log(user);
+
+      //if user created then save user info to database
+      if (user) {
+        await setDoc(doc(db, 'Users', user.uid), {
+          email: user.email,
+          name: data.name,
+        });
+      }
+      console.log('User registered successfully!');
+      toast.success('User registered successfully!', {
+        position: 'top-center',
+      });
+    } catch (e) {
+      console.log(e.message);
+      toast.error('Error while register user.', {
+        position: 'top-center',
+      });
+    }
   };
 
   return (
