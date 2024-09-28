@@ -7,15 +7,20 @@ import { getFirestore } from 'firebase/firestore';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const API_KEY = import.meta.env.VITE_API_KEY;
+const AUTH_DOMAIN = import.meta.env.VITE_AUTH_DOMAIN;
+const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
+const STORAGE_BUCKET = import.meta.env.VITE_STORAGE_BUCKET;
+const MESSAGING_SENDER_ID = import.meta.env.VITE_MESSAGING_SENDER_ID;
+const APP_ID = import.meta.env.VITE_APP_ID;
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: API_KEY,
-  authDomain: 'learnlingo-project-ed08f.firebaseapp.com',
-  projectId: 'learnlingo-project-ed08f',
-  storageBucket: 'learnlingo-project-ed08f.appspot.com',
-  messagingSenderId: '1006360093652',
-  appId: '1:1006360093652:web:4a98a1e96effd045512c41',
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
 };
 
 // Initialize Firebase

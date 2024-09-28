@@ -6,6 +6,9 @@ import { useId, useState } from 'react';
 import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import eyeIcon from '/eye.svg';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
+import { toast } from 'react-toastify';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -26,7 +29,7 @@ const signInSchema = yup.object({
     .max(maxPasswordLength, 'Too long'),
 });
 
-const SingIn = () => {
+const SingIn = ({ modalClose }) => {
   const [isPassword, setIsPassword] = useState(true);
 
   const emailId = useId();
@@ -43,8 +46,24 @@ const SingIn = () => {
 
   const togglePassword = () => setIsPassword(!isPassword);
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log('Дані форми:', data);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log('User logged in successfully!');
+      toast.success('User logged in successfully!', {
+        position: 'top-center',
+      });
+
+      modalClose();
+    } catch (e) {
+      console.log(e.message);
+      toast.error('Error while register user.', {
+        position: 'top-center',
+      });
+      modalClose();
+    }
   };
 
   return (

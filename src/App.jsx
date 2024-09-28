@@ -8,8 +8,18 @@ import Layout from './components/Layout/Layout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useState } from 'react';
+import { auth } from './config/firebase';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      setUser(user);
+    });
+  });
+
   return (
     <>
       <Layout>

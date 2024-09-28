@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '../Icon/Icon';
 import styles from './AuthNav.module.css';
 import logoutIcon from '/logout.svg';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import SignUp from '../SignUp/SignUp';
 import SingIn from '../SignIn/SignIn';
+import { auth, db } from '../../config/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export const AuthNav = () => {
+  //
+  const [userDetails, setUserDetails] = useState(null);
+  //
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
 
@@ -15,6 +20,31 @@ export const AuthNav = () => {
 
   const handleSignUpClose = () => setIsSignUpOpen(false);
   const handleSignInClose = () => setIsSignInOpen(false);
+
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async user => {
+      console.log(user);
+      const docRef = doc(db, 'Users', user.uid);
+      console.log('docRef: ', docRef);
+      const docSnap = await getDoc(docRef);
+      console.log('docSnap: ', docSnap);
+      if (docSnap.exists()) {
+        setUserDetails(docSnap.data());
+        console.log('docSnap.data(): ', docSnap.data());
+      } else {
+        console.log('User is not logged!');
+      }
+    });
+  };
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      console.log('User logged out successfully!')
+    }
+  };
+
+  useEffect(() => fetchUserData, []);
 
   return (
     <div className={styles.container}>
@@ -40,7 +70,7 @@ export const AuthNav = () => {
           onCloseModal={handleSignUpClose}
           modalIsOpen={isSignUpOpen}
         >
-          <SignUp />
+          <SignUp modalClose={handleSignUpClose} />
         </ModalWindow>
       )}
 
@@ -49,7 +79,7 @@ export const AuthNav = () => {
           onCloseModal={handleSignInClose}
           modalIsOpen={isSignInOpen}
         >
-          <SingIn />
+          <SingIn modalClose={handleSignInClose} />
         </ModalWindow>
       )}
     </div>

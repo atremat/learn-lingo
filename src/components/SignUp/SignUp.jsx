@@ -32,7 +32,7 @@ const signUpSchema = yup.object({
     .max(maxPasswordLength, 'Too long'),
 });
 
-const SignUp = () => {
+const SignUp = ({ modalClose }) => {
   const [isPassword, setIsPassword] = useState(true);
 
   const nameId = useId();
@@ -71,11 +71,15 @@ const SignUp = () => {
       toast.success('User registered successfully!', {
         position: 'top-center',
       });
+
+      modalClose();
     } catch (e) {
       console.log(e.message);
       toast.error('Error while register user.', {
         position: 'top-center',
       });
+
+      modalClose();
     }
   };
 
