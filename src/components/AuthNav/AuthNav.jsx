@@ -37,13 +37,6 @@ export const AuthNav = () => {
     });
   };
 
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      console.log('User logged out successfully!')
-    }
-  };
-
   useEffect(() => fetchUserData, []);
 
   return (
