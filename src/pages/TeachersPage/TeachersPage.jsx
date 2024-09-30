@@ -1,5 +1,5 @@
 import styles from './TeachersPage.module.css';
-import teachers from '../../data/teachers.json';
+// import teachers from '../../data/teachers.json';
 import FiltersBar from '../../components/FiltersBar/FiltersBar';
 import TeachersList from '../../components/TeachersList/TeachersList';
 
@@ -8,7 +8,7 @@ const TeachersPage = () => {
     <main className={styles.main}>
       <FiltersBar />
 
-      <TeachersList teachers={teachers} />
+      <TeachersList />
 
       <button type="button" className={styles.moreBtn}>
         Load more
