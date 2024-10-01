@@ -9,10 +9,6 @@ const TeachersPage = () => {
       <FiltersBar />
 
       <TeachersList />
-
-      <button type="button" className={styles.moreBtn}>
-        Load more
-      </button>
     </main>
   );
 };
