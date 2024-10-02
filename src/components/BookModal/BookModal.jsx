@@ -47,7 +47,7 @@ const BookModal = ({ modalClose, teacher }) => {
     defaultValues: {
       fullname: '',
       email: '',
-      birthDate: '',
+      phoneNumber: '',
       question: '',
     },
   });
@@ -159,40 +159,40 @@ const BookModal = ({ modalClose, teacher }) => {
           <p className={styles.errorText}>{errors.question?.message}</p>
         </div>
 
-        <div className={styles.nameWrapper}>
-          <label htmlFor={fullnameId} className={styles.label}>
-            Full name
-          </label>
-          <input
-            id={fullnameId}
-            {...register('fullname')}
-            className={styles.input}
-          />
-          <p className={styles.errorText}>{errors.fullname?.message}</p>
-        </div>
+        <div className={styles.userInfo}>
+          <div className={styles.nameWrapper}>
+            <input
+              id={fullnameId}
+              {...register('fullname')}
+              className={styles.input}
+              placeholder="Full name"
+            />
+            <p className={styles.errorText}>{errors.fullname?.message}</p>
+          </div>
 
-        <div className={styles.emailWrapper}>
-          <label htmlFor={emailId} className={styles.label}>
-            Email
-          </label>
-          <input id={emailId} {...register('email')} className={styles.input} />
-          <p className={styles.errorText}>{errors.email?.message}</p>
-        </div>
+          <div className={styles.emailWrapper}>
+            <input
+              id={emailId}
+              {...register('email')}
+              className={styles.input}
+              placeholder="Email"
+            />
+            <p className={styles.errorText}>{errors.email?.message}</p>
+          </div>
 
-        <div className={styles.dateWrapper}>
-          <label htmlFor={phoneNumberId} className={styles.label}>
-            Date of birth
-          </label>
-          <input
-            id={phoneNumberId}
-            {...register('phoneNumber')}
-            className={styles.input}
-          />
-          <p className={styles.errorText}>{errors.birthDate?.message}</p>
+          <div className={styles.dateWrapper}>
+            <input
+              id={phoneNumberId}
+              {...register('phoneNumber')}
+              className={styles.input}
+              placeholder="Phone number"
+            />
+            <p className={styles.errorText}>{errors.phoneNumber?.message}</p>
+          </div>
         </div>
 
         <button type="submit" className={styles.submitBtn}>
-          Register
+          Book
         </button>
       </form>
     </div>

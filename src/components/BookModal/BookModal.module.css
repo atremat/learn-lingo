@@ -53,6 +53,7 @@
 
 .fieldsetWrapper {
   margin-bottom: 40px;
+  position: relative;
 }
 
 .fieldset {
@@ -85,9 +86,47 @@
   /* border-color: red; */
 }
 
-.label {
+.input {
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 100%;
+}
+
+.input::placeholder {
   font-size: 16px;
   line-height: 1.375;
-  text-align: center;
   color: var(--black-color, black);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.submitBtn {
+  border-radius: 12px;
+  width: 472px;
+  height: 60px;
+  background-color: var(--primary-color, gold);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  color: var(--black-color, black);
+}
+
+.errorText {
+  position: absolute;
+  left: 18px;
+  bottom: -16px;
+  color: red;
+  font-size: 0.8rem;
+}
+
+.nameWrapper,
+.emailWrapper,
+.dateWrapper {
+  position: relative;
 }
