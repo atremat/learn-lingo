@@ -29,8 +29,11 @@ const TeachersList = () => {
     dispatch(fetchTeachers());
   }, [dispatch]);
 
-  const handleShowMore = () => {
+  useEffect(() => {
     setVisibleTeachers(teachers.slice(0, (page + 1) * PER_PAGE));
+  }, [teachers, page]);
+
+  const handleShowMore = () => {
     setPage(prev => prev + 1);
   };
 

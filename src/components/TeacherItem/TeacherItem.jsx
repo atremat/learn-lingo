@@ -3,9 +3,15 @@ import Icon from '../Icon/Icon';
 import styles from './TeacherItem.module.css';
 import book from '/book.svg';
 import defaultAvatar from '/user.png';
+import ModalWindow from '../ModalWindow/ModalWindow';
+import BookModal from '../BookModal/BookModal';
 
 const TeacherItem = ({ teacher }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const [isBookOpen, setBookOpen] = useState(false);
+  const handleBookOpen = () => setBookOpen(true);
+  const handleBookClose = () => setBookOpen(false);
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
@@ -159,10 +165,16 @@ const TeacherItem = ({ teacher }) => {
           <button
             type="button"
             className={styles.bookBtn}
-            onClick={() => console.log('booked!')}
+            onClick={handleBookOpen}
           >
             Book trial lesson
           </button>
+        )}
+
+        {isBookOpen && (
+          <ModalWindow onCloseModal={handleBookClose} modalIsOpen={isBookOpen}>
+            <BookModal modalClose={handleBookClose} teacher={teacher} />
+          </ModalWindow>
         )}
       </section>
     </li>
