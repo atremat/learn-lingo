@@ -19,6 +19,9 @@ const AppBar = () => {
           <NavLink to="/teachers" className={styles.link}>
             Teachers
           </NavLink>
+          <NavLink to="/favorites" className={styles.link}>
+            Favorites
+          </NavLink>
         </nav>
       </div>
 

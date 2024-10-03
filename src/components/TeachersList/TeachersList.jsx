@@ -9,7 +9,7 @@ import TeacherItem from '../TeacherItem/TeacherItem';
 import styles from './TeachersList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PER_PAGE = 3;
+const PER_PAGE = 4;
 
 const TeachersList = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const TeachersList = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setVisibleTeachers(teachers.slice(0, (page + 1) * PER_PAGE));
+    setVisibleTeachers(teachers.slice(0, page * PER_PAGE));
   }, [teachers, page]);
 
   const handleShowMore = () => {
