@@ -7,7 +7,9 @@ import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import eyeIcon from '/eye.svg';
 import { toast } from 'react-toastify';
-import { registerUser } from '../../services/authService';
+// import { registerUser } from '../../services/authService';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../redux/auth/operations';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -31,6 +33,7 @@ const signUpSchema = yup.object({
 });
 
 const SignUp = ({ modalClose }) => {
+  const dispatch = useDispatch();
   const [isPassword, setIsPassword] = useState(true);
 
   const nameId = useId();
@@ -49,33 +52,22 @@ const SignUp = ({ modalClose }) => {
   const togglePassword = () => setIsPassword(!isPassword);
 
   const onSubmit = async data => {
-    try {
-      await registerUser(data);
-
-      toast.success('User registered successfully!', {
-        position: 'top-center',
+    dispatch(registerUser(data))
+      .unwrap()
+      .then(() =>
+        toast.success('User registered successfully!', {
+          position: 'top-center',
+        })
+      )
+      .catch(errMessage => {
+        toast.error(errMessage, {
+          position: 'top-center',
+        });
+      })
+      .finally(() => {
+        reset();
+        modalClose();
       });
-    } catch (err) {
-      let errMessage;
-
-      const errorCode = err.code;
-
-      switch (errorCode) {
-        case 'auth/email-already-in-use':
-          errMessage = 'This email is already in use!';
-          break;
-
-        default:
-          errMessage = 'Error while register user.';
-          break;
-      }
-      toast.error(errMessage, {
-        position: 'top-center',
-      });
-    } finally {
-      reset();
-      modalClose();
-    }
   };
 
   return (

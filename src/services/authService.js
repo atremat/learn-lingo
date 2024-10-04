@@ -5,34 +5,33 @@ import {
 } from 'firebase/auth';
 import { auth, database } from '../config/firebase';
 import { store } from '../redux/store';
-import { clearUser, setUser } from '../redux/auth/slice';
+
 import { ref, set } from 'firebase/database';
 
-// Register a new user
-export const registerUser = async ({ email, password, name }) => {
-  //create new user
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
+// export const registerUser = async ({ email, password, name }) => {
+//   //create new user
+//   const userCredential = await createUserWithEmailAndPassword(
+//     auth,
+//     email,
+//     password
+//   );
 
-  //get user info
-  const user = userCredential.user;
+//   //get user info
+//   const user = userCredential.user;
 
-  //save user info to redux
-  store.dispatch(setUser({ uid: user.uid, email: user.email, name }));
+//   //save user info to redux
+//   store.dispatch(setUser({ uid: user.uid, email: user.email, name }));
 
-  if (user) {
-    await set(ref(database, 'users/' + user.uid), {
-      email: user.email,
-      name: name,
-      createdAt: new Date().toISOString(), // Зберігаємо час створення
-    });
-  }
+//   if (user) {
+//     await set(ref(database, 'users/' + user.uid), {
+//       email: user.email,
+//       name: name,
+//       createdAt: new Date().toISOString(), // Зберігаємо час створення
+//     });
+//   }
 
-  return userCredential.user;
-};
+//   return userCredential.user;
+// };
 
 // Login an existing user
 export const loginUser = async (email, password) => {
