@@ -9,7 +9,8 @@ import eyeIcon from '/eye.svg';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { toast } from 'react-toastify';
-import { loginUser } from '../../services/authService';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/auth/operations';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -31,6 +32,7 @@ const signInSchema = yup.object({
 });
 
 const SingIn = ({ modalClose }) => {
+  const dispatch = useDispatch();
   const [isPassword, setIsPassword] = useState(true);
 
   const emailId = useId();
@@ -49,23 +51,38 @@ const SingIn = ({ modalClose }) => {
 
   const onSubmit = async data => {
     console.log('Дані форми:', data);
-
-    try {
-      await loginUser(data.email, data.password);
-
-      console.log('User logged in successfully!');
-      toast.success('User logged in successfully!', {
-        position: 'top-center',
+    dispatch(loginUser({ email: data.email, password: data.password }))
+      .unwrap()
+      .then(() =>
+        toast.success('User logged in successfully!', {
+          position: 'top-center',
+        })
+      )
+      .catch(errMessage => {
+        toast.error(errMessage, {
+          position: 'top-center',
+        });
+      })
+      .finally(() => {
+        reset();
+        modalClose();
       });
-    } catch (e) {
-      console.log(e.message);
-      toast.error('Error while login user.', {
-        position: 'top-center',
-      });
-    } finally {
-      reset();
-      modalClose();
-    }
+
+    //   await loginUser({ email: data.email, password: data.password });
+
+    //   console.log('User logged in successfully!');
+    //   toast.success('User logged in successfully!', {
+    //     position: 'top-center',
+    //   });
+    // } catch (e) {
+    //   console.log(e.message);
+    //   toast.error('Error while login user.', {
+    //     position: 'top-center',
+    //   });
+    // } finally {
+    //   reset();
+    //   modalClose();
+    // }
   };
 
   return (

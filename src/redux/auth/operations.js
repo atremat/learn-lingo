@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { auth, database } from '../../config/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ref, set } from 'firebase/database';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { get, ref, set } from 'firebase/database';
 
 // Register a new user
 export const registerUser = createAsyncThunk(
@@ -40,7 +43,58 @@ export const registerUser = createAsyncThunk(
           break;
 
         default:
-          errMessage = 'Error while register user.';
+          errMessage = 'Error while registering user.';
+          break;
+      }
+      return thunkAPI.rejectWithValue(errMessage);
+    }
+  }
+);
+
+//login user
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async ({ email, password }, thunkAPI) => {
+    try {
+      //create new user
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      //get user info
+      const user = userCredential.user;
+
+      if (user) {
+        const userRef = ref(database, 'users/' + user.uid);
+
+        // get data from Realtime Database
+        const snapshot = await get(userRef);
+
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+
+          //save userinfo to redux
+          return { uid: user.uid, email: user.email, name: userData.name };
+        } else {
+          throw new Error('User data not found in the database');
+        }
+      }
+    } catch (err) {
+      let errMessage;
+
+      const errorCode = err.code;
+      console.log('err.code', err.code);
+      console.log('err.message', err.message);
+
+      switch (errorCode) {
+        case 'auth/invalid-credential':
+          errMessage = 'Wrong email or password!';
+          break;
+
+        default:
+          errMessage = 'Error while login user.';
           break;
       }
       return thunkAPI.rejectWithValue(errMessage);

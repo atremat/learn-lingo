@@ -34,11 +34,11 @@ import { ref, set } from 'firebase/database';
 // };
 
 // Login an existing user
-export const loginUser = async (email, password) => {
-  const result = await signInWithEmailAndPassword(auth, email, password);
-  store.dispatch(setUser(result.user));
-  return result.user;
-};
+// export const loginUser = async (email, password) => {
+//   const result = await signInWithEmailAndPassword(auth, email, password);
+//   store.dispatch(setUser(result.user));
+//   return result.user;
+// };
 
 // Logout the current user
 export const logoutUser = async () => {
