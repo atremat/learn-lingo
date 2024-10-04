@@ -3,15 +3,35 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth, database } from '../config/firebase';
 import { store } from '../redux/store';
 import { clearUser, setUser } from '../redux/auth/slice';
+import { ref, set } from 'firebase/database';
 
 // Register a new user
-export const registerUser = async (email, password) => {
-  const result = await createUserWithEmailAndPassword(auth, email, password);
-  store.dispatch(setUser(result.user));
-  return result.user;
+export const registerUser = async ({ email, password, name }) => {
+  //create new user
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  //get user info
+  const user = userCredential.user;
+
+  //save user info to redux
+  store.dispatch(setUser({ uid: user.uid, email: user.email, name }));
+
+  if (user) {
+    await set(ref(database, 'users/' + user.uid), {
+      email: user.email,
+      name: name,
+      createdAt: new Date().toISOString(), // Зберігаємо час створення
+    });
+  }
+
+  return userCredential.user;
 };
 
 // Login an existing user

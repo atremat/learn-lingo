@@ -5,7 +5,7 @@ import logoutIcon from '/logout.svg';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import SignUp from '../SignUp/SignUp';
 import SingIn from '../SignIn/SignIn';
-import { auth, db } from '../../config/firebase';
+import { auth, database } from '../../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 export const AuthNav = () => {
@@ -21,23 +21,23 @@ export const AuthNav = () => {
   const handleSignUpClose = () => setIsSignUpOpen(false);
   const handleSignInClose = () => setIsSignInOpen(false);
 
-  const fetchUserData = async () => {
-    auth.onAuthStateChanged(async user => {
-      console.log(user);
-      const docRef = doc(db, 'Users', user.uid);
-      console.log('docRef: ', docRef);
-      const docSnap = await getDoc(docRef);
-      console.log('docSnap: ', docSnap);
-      if (docSnap.exists()) {
-        setUserDetails(docSnap.data());
-        console.log('docSnap.data(): ', docSnap.data());
-      } else {
-        console.log('User is not logged!');
-      }
-    });
-  };
+  // const fetchUserData = async () => {
+  //   auth.onAuthStateChanged(async user => {
+  //     console.log(user);
+  //     const docRef = doc(db, 'Users', user.uid);
+  //     console.log('docRef: ', docRef);
+  //     const docSnap = await getDoc(docRef);
+  //     console.log('docSnap: ', docSnap);
+  //     if (docSnap.exists()) {
+  //       setUserDetails(docSnap.data());
+  //       console.log('docSnap.data(): ', docSnap.data());
+  //     } else {
+  //       console.log('User is not logged!');
+  //     }
+  //   });
+  // };
 
-  useEffect(() => fetchUserData, []);
+  // useEffect(() => fetchUserData, []);
 
   return (
     <div className={styles.container}>

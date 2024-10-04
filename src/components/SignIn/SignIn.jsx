@@ -9,6 +9,7 @@ import eyeIcon from '/eye.svg';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { toast } from 'react-toastify';
+import { loginUser } from '../../services/authService';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -50,18 +51,19 @@ const SingIn = ({ modalClose }) => {
     console.log('Дані форми:', data);
 
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await loginUser(data.email, data.password);
+
       console.log('User logged in successfully!');
       toast.success('User logged in successfully!', {
         position: 'top-center',
       });
-
-      modalClose();
     } catch (e) {
       console.log(e.message);
-      toast.error('Error while register user.', {
+      toast.error('Error while login user.', {
         position: 'top-center',
       });
+    } finally {
+      reset();
       modalClose();
     }
   };

@@ -6,10 +6,8 @@ import { useId, useState } from 'react';
 import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import eyeIcon from '/eye.svg';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../../config/firebase';
-import { setDoc, doc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { registerUser } from '../../services/authService';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -51,34 +49,31 @@ const SignUp = ({ modalClose }) => {
   const togglePassword = () => setIsPassword(!isPassword);
 
   const onSubmit = async data => {
-    console.log('Дані форми:', data);
-
     try {
-      //creatte new user
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
-      //get user info
-      const user = auth.currentUser;
-      console.log(user);
+      await registerUser(data);
 
-      //if user created then save user info to database
-      if (user) {
-        await setDoc(doc(db, 'Users', user.uid), {
-          email: user.email,
-          name: data.name,
-        });
-      }
-      console.log('User registered successfully!');
       toast.success('User registered successfully!', {
         position: 'top-center',
       });
+    } catch (err) {
+      let errMessage;
 
-      modalClose();
-    } catch (e) {
-      console.log(e.message);
-      toast.error('Error while register user.', {
+      const errorCode = err.code;
+
+      switch (errorCode) {
+        case 'auth/email-already-in-use':
+          errMessage = 'This email is already in use!';
+          break;
+
+        default:
+          errMessage = 'Error while register user.';
+          break;
+      }
+      toast.error(errMessage, {
         position: 'top-center',
       });
-
+    } finally {
+      reset();
       modalClose();
     }
   };
