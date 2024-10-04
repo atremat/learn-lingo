@@ -7,11 +7,15 @@ import SignUp from '../SignUp/SignUp';
 import SingIn from '../SignIn/SignIn';
 import { auth, database } from '../../config/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLoggedIn, selectUser } from '../../redux/auth/selectors';
+import { logoutUser } from '../../redux/auth/operations';
 
 export const AuthNav = () => {
-  //
-  const [userDetails, setUserDetails] = useState(null);
-  //
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
 
@@ -41,22 +45,49 @@ export const AuthNav = () => {
 
   return (
     <div className={styles.container}>
-      <button
-        type="button"
-        onClick={handleSignInOpen}
-        className={styles.loginButton}
-      >
-        <img src={logoutIcon} alt="Logout icon" className={styles.logoutIcon} />
-        <span className={styles.loginText}>Log in</span>
-      </button>
+      {!user && (
+        <div className={styles.unsignedWrapper}>
+          <button
+            type="button"
+            onClick={handleSignInOpen}
+            className={styles.loginButton}
+          >
+            <img
+              src={logoutIcon}
+              alt="Logout icon"
+              className={styles.logoutIcon}
+            />
+            <span className={styles.loginText}>Log in</span>
+          </button>
 
-      <button
-        type="button"
-        onClick={handleSignUpOpen}
-        className={styles.registerButton}
-      >
-        Registration
-      </button>
+          <button
+            type="button"
+            onClick={handleSignUpOpen}
+            className={styles.registerButton}
+          >
+            Registration
+          </button>
+        </div>
+      )}
+
+      {user && (
+        <div className={styles.signedWrapper}>
+          <button
+            type="button"
+            onClick={() => dispatch(logoutUser())}
+            className={styles.loginButton}
+          >
+            <img
+              src={logoutIcon}
+              alt="Logout icon"
+              className={styles.logoutIcon}
+            />
+            <span className={styles.loginText}>Log out</span>
+          </button>
+
+          <div className={styles.registerButton}>{user?.name || 'User'}</div>
+        </div>
+      )}
 
       {isSignUpOpen && (
         <ModalWindow

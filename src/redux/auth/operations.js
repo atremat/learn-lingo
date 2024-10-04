@@ -3,6 +3,7 @@ import { auth, database } from '../../config/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { get, ref, set } from 'firebase/database';
 
@@ -98,6 +99,18 @@ export const loginUser = createAsyncThunk(
           break;
       }
       return thunkAPI.rejectWithValue(errMessage);
+    }
+  }
+);
+
+//logout user
+export const logoutUser = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );

@@ -6,8 +6,6 @@ import { useId, useState } from 'react';
 import clsx from 'clsx';
 import Icon from '../Icon/Icon';
 import eyeIcon from '/eye.svg';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/firebase';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/auth/operations';
@@ -67,22 +65,6 @@ const SingIn = ({ modalClose }) => {
         reset();
         modalClose();
       });
-
-    //   await loginUser({ email: data.email, password: data.password });
-
-    //   console.log('User logged in successfully!');
-    //   toast.success('User logged in successfully!', {
-    //     position: 'top-center',
-    //   });
-    // } catch (e) {
-    //   console.log(e.message);
-    //   toast.error('Error while login user.', {
-    //     position: 'top-center',
-    //   });
-    // } finally {
-    //   reset();
-    //   modalClose();
-    // }
   };
 
   return (

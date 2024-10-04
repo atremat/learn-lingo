@@ -1,12 +1,12 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import { auth, database } from '../config/firebase';
-import { store } from '../redux/store';
+// import {
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   signOut,
+// } from 'firebase/auth';
+// import { auth, database } from '../config/firebase';
+// import { store } from '../redux/store';
 
-import { ref, set } from 'firebase/database';
+// import { ref, set } from 'firebase/database';
 
 // export const registerUser = async ({ email, password, name }) => {
 //   //create new user
@@ -41,7 +41,7 @@ import { ref, set } from 'firebase/database';
 // };
 
 // Logout the current user
-export const logoutUser = async () => {
-  await signOut(auth);
-  store.dispatch(clearUser());
-};
+// export const logoutUser = async () => {
+//   await signOut(auth);
+//   store.dispatch(clearUser());
+// };
