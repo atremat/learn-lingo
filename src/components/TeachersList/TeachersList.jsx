@@ -23,7 +23,6 @@ const TeachersList = () => {
   );
 
   const isVisible = page * PER_PAGE < teachers.length;
-  console.log('visibleTeachers ', visibleTeachers);
 
   useEffect(() => {
     dispatch(fetchTeachers());

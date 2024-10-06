@@ -10,15 +10,21 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 import { auth } from './config/firebase';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from './redux/auth/operations';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      setUser(user);
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        dispatch(refreshUser());
+      }
     });
-  });
+
+    return () => unsubscribe();
+  }, [dispatch]);
 
   return (
     <>

@@ -48,7 +48,6 @@ const SingIn = ({ modalClose }) => {
   const togglePassword = () => setIsPassword(!isPassword);
 
   const onSubmit = async data => {
-    console.log('Дані форми:', data);
     dispatch(loginUser({ email: data.email, password: data.password }))
       .unwrap()
       .then(() =>

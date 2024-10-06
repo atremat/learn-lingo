@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, logoutUser, registerUser } from './operations';
+import { loginUser, logoutUser, refreshUser, registerUser } from './operations';
 
 const handlePending = state => {
   state.loading = true;
@@ -28,7 +28,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.loading = false;
       })
-      .addCase(loginUser.rejected, handleRejected)
+      .addCase(registerUser.rejected, handleRejected)
       //sign in
       .addCase(loginUser.pending, handlePending)
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -36,7 +36,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.loading = false;
       })
-      .addCase(registerUser.rejected, handleRejected)
+      .addCase(loginUser.rejected, handleRejected)
       //logout
       .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.fulfilled, state => {
@@ -48,7 +48,15 @@ const authSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to log out';
-      });
+      })
+      //refresh
+      .addCase(refreshUser.pending, handlePending)
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.loading = false;
+      })
+      .addCase(refreshUser.rejected, handleRejected);
   },
 });
 

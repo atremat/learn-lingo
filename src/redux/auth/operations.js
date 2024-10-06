@@ -86,8 +86,6 @@ export const loginUser = createAsyncThunk(
       let errMessage;
 
       const errorCode = err.code;
-      console.log('err.code', err.code);
-      console.log('err.message', err.message);
 
       switch (errorCode) {
         case 'auth/invalid-credential':
@@ -109,6 +107,33 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       await signOut(auth);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+//refresh user
+export const refreshUser = createAsyncThunk(
+  'auth/refreshUser',
+  async (_, thunkAPI) => {
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        return thunkAPI.rejectWithValue('User is not authenticated');
+      }
+
+      const userRef = ref(database, 'users/' + user.uid);
+
+      const snapshot = await get(userRef);
+
+      if (snapshot.exists()) {
+        const userData = snapshot.val();
+        return { uid: user.uid, email: user.email, name: userData.name };
+      } else {
+        throw new Error('Something went wrong! Try login again.');
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
