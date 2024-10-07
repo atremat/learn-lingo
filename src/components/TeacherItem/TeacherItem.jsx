@@ -5,16 +5,30 @@ import book from '/book.svg';
 import defaultAvatar from '/user.png';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import BookModal from '../BookModal/BookModal';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 const TeacherItem = ({ teacher }) => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLiked, setLiked] = useState(false);
 
   const [isBookOpen, setBookOpen] = useState(false);
+
   const handleBookOpen = () => setBookOpen(true);
   const handleBookClose = () => setBookOpen(false);
 
-  const toggleReadMore = () => {
-    setIsExpanded(!isExpanded);
+  const toggleReadMore = () => setIsExpanded(!isExpanded);
+
+  const handleLike = () => {
+    if (!isLoggedIn) {
+      toast.info('Login first to save favorites!', {
+        position: 'top-center',
+      });
+    } else {
+      console.log('liked');
+    }
   };
 
   return (
@@ -71,13 +85,28 @@ const TeacherItem = ({ teacher }) => {
               >{`Price / 1 hour: ${teacher['price_per_hour']}$`}</p>
             </div>
 
-            <Icon
-              id="heart-empty"
-              width={26}
-              height={26}
-              className={styles.heartIcon}
-              fillColor="#121417"
-            />
+            {/*  */}
+
+            <button type="button" onClick={handleLike}>
+              {isLiked ? (
+                <Icon
+                  id="heart-filled"
+                  width={26}
+                  height={26}
+                  className={styles.heartIcon}
+                  fillColor="#f4c550"
+                />
+              ) : (
+                <Icon
+                  id="heart-empty"
+                  width={26}
+                  height={26}
+                  className={styles.heartIcon}
+                  fillColor="#121417"
+                />
+              )}
+            </button>
+            {/*  */}
           </div>
         </div>
 

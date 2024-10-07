@@ -25,7 +25,7 @@ export const AuthNav = () => {
 
   return (
     <div className={styles.container}>
-      {!user && (
+      {!isLoggedIn && (
         <div className={styles.unsignedWrapper}>
           <button
             type="button"
@@ -50,7 +50,7 @@ export const AuthNav = () => {
         </div>
       )}
 
-      {user && (
+      {isLoggedIn && (
         <div className={styles.signedWrapper}>
           <button
             type="button"

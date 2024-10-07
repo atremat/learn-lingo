@@ -2,8 +2,12 @@ import styles from './AppBar.module.css';
 import flag from '/flag.svg';
 import { NavLink } from 'react-router-dom';
 import { AuthNav } from '../AuthNav/AuthNav';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 const AppBar = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <header className={styles.header}>
       <div className={styles.mainContainer}>
@@ -19,9 +23,11 @@ const AppBar = () => {
           <NavLink to="/teachers" className={styles.link}>
             Teachers
           </NavLink>
-          <NavLink to="/favorites" className={styles.link}>
-            Favorites
-          </NavLink>
+          {isLoggedIn && (
+            <NavLink to="/favorites" className={styles.link}>
+              Favorites
+            </NavLink>
+          )}
         </nav>
       </div>
 
