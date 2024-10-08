@@ -6,15 +6,21 @@ import defaultAvatar from '/user.png';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import BookModal from '../BookModal/BookModal';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { toggleFavorite } from '../../redux/teachers/slice';
+import { selectFavoriteTeachers } from '../../redux/teachers/selectors';
 
-const TeacherItem = ({ teacher }) => {
+const TeacherItem = ({ teacher, id }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isLiked, setLiked] = useState(false);
+  const favoriteIndexes = useSelector(selectFavoriteTeachers);
+
+  const [isLiked, setLiked] = useState(favoriteIndexes.includes(id));
 
   const [isBookOpen, setBookOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleBookOpen = () => setBookOpen(true);
   const handleBookClose = () => setBookOpen(false);
@@ -27,7 +33,8 @@ const TeacherItem = ({ teacher }) => {
         position: 'top-center',
       });
     } else {
-      console.log('liked');
+      setLiked(!isLiked);
+      dispatch(toggleFavorite(id));
     }
   };
 

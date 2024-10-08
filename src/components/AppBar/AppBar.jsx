@@ -4,9 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import clsx from 'clsx';
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(styles.link, isActive && styles.active);
+  };
 
   return (
     <header className={styles.header}>
@@ -17,14 +22,14 @@ const AppBar = () => {
         </div>
 
         <nav className={styles.nav}>
-          <NavLink to="/" className={styles.link}>
+          <NavLink to="/" className={buildLinkClass}>
             Home
           </NavLink>
-          <NavLink to="/teachers" className={styles.link}>
+          <NavLink to="/teachers" className={buildLinkClass}>
             Teachers
           </NavLink>
           {isLoggedIn && (
-            <NavLink to="/favorites" className={styles.link}>
+            <NavLink to="/favorites" className={buildLinkClass}>
               Favorites
             </NavLink>
           )}

@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
-import { fetchTeachers } from '../../redux/teachers/operations';
 import {
-  selectTeachers,
   selectTeachersError,
   selectTeachersLoading,
 } from '../../redux/teachers/selectors';
 import TeacherItem from '../TeacherItem/TeacherItem';
 import styles from './TeachersList.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const PER_PAGE = 4;
 
-const TeachersList = () => {
-  const dispatch = useDispatch();
-  const teachers = useSelector(selectTeachers);
+const TeachersList = ({ teachers }) => {
   const loading = useSelector(selectTeachersLoading);
   const error = useSelector(selectTeachersError);
 
@@ -23,10 +19,6 @@ const TeachersList = () => {
   );
 
   const isVisible = page * PER_PAGE < teachers.length;
-
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch]);
 
   useEffect(() => {
     setVisibleTeachers(teachers.slice(0, page * PER_PAGE));
@@ -44,10 +36,11 @@ const TeachersList = () => {
       {!loading && visibleTeachers?.length > 0 && (
         <>
           <ul className={styles.list}>
-            {visibleTeachers.map(teacher => (
+            {visibleTeachers.map((teacher, id) => (
               <TeacherItem
                 key={`${teacher.name}${teacher.surname}`}
                 teacher={teacher}
+                id={id}
               />
             ))}
           </ul>

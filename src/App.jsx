@@ -8,13 +8,18 @@ import Layout from './components/Layout/Layout';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { auth } from './config/firebase';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
+import { fetchTeachers } from './redux/teachers/operations';
 
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTeachers());
+  }, [dispatch]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {

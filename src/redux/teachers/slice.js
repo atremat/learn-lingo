@@ -5,10 +5,22 @@ const teachersSlice = createSlice({
   name: 'teachers',
   initialState: {
     data: [],
+    favorites: [],
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    //toggle state of favorite
+    toggleFavorite: (state, action) => {
+      const id = action.payload;
+      const index = state.favorites.indexOf(id);
+      if (index !== -1) {
+        state.favorites.splice(index, 1);
+      } else {
+        state.favorites.push(id);
+      }
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchTeachers.pending, state => {
@@ -27,3 +39,5 @@ const teachersSlice = createSlice({
 });
 
 export const teachersReducer = teachersSlice.reducer;
+
+export const { toggleFavorite } = teachersSlice.actions;
