@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ref, get } from 'firebase/database';
 import { database } from '../../config/firebase';
-import { createContext } from 'react';
 
 export const fetchTeachers = createAsyncThunk(
   'teachers/fetchTeachers',
@@ -21,5 +20,3 @@ export const fetchTeachers = createAsyncThunk(
     }
   }
 );
-
-// export const fetchFavorites = createContext

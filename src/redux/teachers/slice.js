@@ -20,6 +20,9 @@ const teachersSlice = createSlice({
         state.favorites.push(id);
       }
     },
+    setFavorites: (state, action) => {
+      state.favorites = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -40,4 +43,4 @@ const teachersSlice = createSlice({
 
 export const teachersReducer = teachersSlice.reducer;
 
-export const { toggleFavorite } = teachersSlice.actions;
+export const { toggleFavorite, setFavorites } = teachersSlice.actions;

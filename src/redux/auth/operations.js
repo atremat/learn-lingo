@@ -6,6 +6,8 @@ import {
   signOut,
 } from 'firebase/auth';
 import { get, ref, set } from 'firebase/database';
+import { store } from '../store';
+import { setFavorites } from '../teachers/slice';
 
 // Register a new user
 export const registerUser = createAsyncThunk(
@@ -28,7 +30,11 @@ export const registerUser = createAsyncThunk(
           email: user.email,
           name: name,
           createdAt: new Date().toISOString(),
+          favorites: [],
         });
+
+        //setting initial favorites as empty array
+        store.dispatch(setFavorites([]));
       }
 
       //save userinfo to redux
@@ -75,6 +81,11 @@ export const loginUser = createAsyncThunk(
 
         if (snapshot.exists()) {
           const userData = snapshot.val();
+
+          //set favorites to redux from firebase
+          const favorites = userData.favorites ? userData.favorites : [];
+
+          store.dispatch(setFavorites(favorites));
 
           //save userinfo to redux
           return { uid: user.uid, email: user.email, name: userData.name };
