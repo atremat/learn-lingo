@@ -6,8 +6,6 @@ import {
   signOut,
 } from 'firebase/auth';
 import { get, ref, set } from 'firebase/database';
-import { store } from '../store';
-import { setFavorites } from '../teachers/slice';
 
 // Register a new user
 export const registerUser = createAsyncThunk(
@@ -32,13 +30,10 @@ export const registerUser = createAsyncThunk(
           createdAt: new Date().toISOString(),
           favorites: [],
         });
-
-        //setting initial favorites as empty array
-        store.dispatch(setFavorites([]));
       }
 
       //save userinfo to redux
-      return { uid: user.uid, email: user.email, name };
+      return { uid: user.uid, email: user.email, name, favorites: [] };
     } catch (err) {
       let errMessage;
 
@@ -85,10 +80,13 @@ export const loginUser = createAsyncThunk(
           //set favorites to redux from firebase
           const favorites = userData.favorites ? userData.favorites : [];
 
-          store.dispatch(setFavorites(favorites));
-
           //save userinfo to redux
-          return { uid: user.uid, email: user.email, name: userData.name };
+          return {
+            uid: user.uid,
+            email: user.email,
+            name: userData.name,
+            favorites,
+          };
         } else {
           throw new Error('User data not found in the database');
         }
@@ -141,7 +139,12 @@ export const refreshUser = createAsyncThunk(
 
       if (snapshot.exists()) {
         const userData = snapshot.val();
-        return { uid: user.uid, email: user.email, name: userData.name };
+        return {
+          uid: user.uid,
+          email: user.email,
+          name: userData.name,
+          favorites: userData.favorites,
+        };
       } else {
         throw new Error('Something went wrong! Try login again.');
       }
