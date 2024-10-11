@@ -33,7 +33,7 @@ export const registerUser = createAsyncThunk(
       }
 
       //save userinfo to redux
-      return { uid: user.uid, email: user.email, name, favorites: [] };
+      return { uid: user.uid, email: user.email, name };
     } catch (err) {
       let errMessage;
 
@@ -77,15 +77,11 @@ export const loginUser = createAsyncThunk(
         if (snapshot.exists()) {
           const userData = snapshot.val();
 
-          //set favorites to redux from firebase
-          const favorites = userData.favorites ? userData.favorites : [];
-
           //save userinfo to redux
           return {
             uid: user.uid,
             email: user.email,
             name: userData.name,
-            favorites,
           };
         } else {
           throw new Error('User data not found in the database');
@@ -143,7 +139,6 @@ export const refreshUser = createAsyncThunk(
           uid: user.uid,
           email: user.email,
           name: userData.name,
-          favorites: userData.favorites,
         };
       } else {
         throw new Error('Something went wrong! Try login again.');
