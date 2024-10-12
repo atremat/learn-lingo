@@ -22,20 +22,20 @@ const favoritesSlice = createSlice({
     // toggle state of favorite
     toggleFavorite: (state, action) => {
       const id = action.payload;
-      const index = state.favorites.indexOf(id);
+      const index = state.items.indexOf(id);
       if (index !== -1) {
-        state.favorites.splice(index, 1);
+        state.items.splice(index, 1);
       } else {
-        state.favorites.push(id);
+        state.items.push(id);
       }
     },
     setFavorites: (state, action) => {
-      state.favorites = action.payload;
+      state.items = action.payload;
     },
   },
   extraReducers: builder => {
     builder
-      //sign up
+      //fetchFavorites
       .addCase(fetchFavorites.pending, handlePending)
       .addCase(fetchFavorites.fulfilled, (state, action) => {
         state.items = action.payload;

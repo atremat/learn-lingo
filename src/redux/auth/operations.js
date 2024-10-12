@@ -28,7 +28,7 @@ export const registerUser = createAsyncThunk(
           email: user.email,
           name: name,
           createdAt: new Date().toISOString(),
-          favorites: [],
+          favorites: JSON.stringify([]),
         });
       }
 
