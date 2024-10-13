@@ -6,12 +6,13 @@ import TeachersList from '../../components/TeachersList/TeachersList';
 import { selectFavorites } from '../../redux/favorites/selectors';
 
 const FavoritesPage = () => {
-  const teachers = useSelector(selectTeachers);
-  const favoriteIndexes = useSelector(selectFavorites);
+  // const teachers = useSelector(selectTeachers);
+  // const favoriteIndexes = useSelector(selectFavorites);
 
-  const favoriteTeachers = teachers.filter((_, id) =>
-    favoriteIndexes.includes(id)
-  );
+  // const favoriteTeachers = teachers.filter(teacher =>
+  //   favoriteIndexes.includes(teacher.id)
+  // );
+  const favoriteTeachers = useSelector(selectFavorites);
 
   return (
     <main className={styles.main}>

@@ -21,12 +21,18 @@ const favoritesSlice = createSlice({
   reducers: {
     // toggle state of favorite
     toggleFavorite: (state, action) => {
-      const id = action.payload;
-      const index = state.items.indexOf(id);
+      const id = action.payload.id;
+      console.log('id', id);
+
+      console.log('state.items: ', state.items);
+
+      const index = state.items.findIndex(teacher => teacher.id == id);
+      console.log('index', index);
+
       if (index !== -1) {
         state.items.splice(index, 1);
       } else {
-        state.items.push(id);
+        state.items.push(action.payload);
       }
     },
     setFavorites: (state, action) => {

@@ -11,12 +11,12 @@ import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { toggleFavorite } from '../../redux/favorites/slice';
 import { selectFavorites } from '../../redux/favorites/selectors';
 
-const TeacherItem = ({ teacher, id }) => {
+const TeacherItem = ({ teacher }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isExpanded, setIsExpanded] = useState(false);
   const favoriteIndexes = useSelector(selectFavorites);
 
-  const [isLiked, setLiked] = useState(favoriteIndexes.includes(id));
+  const [isLiked, setLiked] = useState(favoriteIndexes.includes(teacher.id));
 
   const [isBookOpen, setBookOpen] = useState(false);
 
@@ -34,7 +34,7 @@ const TeacherItem = ({ teacher, id }) => {
       });
     } else {
       setLiked(!isLiked);
-      dispatch(toggleFavorite(id));
+      dispatch(toggleFavorite(teacher));
     }
   };
 

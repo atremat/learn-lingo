@@ -1,6 +1,6 @@
 import styles from './AppBar.module.css';
 import flag from '/flag.svg';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
@@ -16,10 +16,10 @@ const AppBar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.mainContainer}>
-        <div className={styles.logoContainer}>
+        <Link to="/" className={styles.logoContainer}>
           <img src={flag} alt="Flag of Ukraine" className={styles.logo} />
           <span className={styles.logoName}>LearnLingo</span>
-        </div>
+        </Link>
 
         <nav className={styles.nav}>
           <NavLink to="/" className={buildLinkClass}>

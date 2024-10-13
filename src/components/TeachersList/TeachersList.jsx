@@ -36,12 +36,8 @@ const TeachersList = ({ teachers }) => {
       {!loading && visibleTeachers?.length > 0 && (
         <>
           <ul className={styles.list}>
-            {visibleTeachers.map((teacher, id) => (
-              <TeacherItem
-                key={`${teacher.name}${teacher.surname}`}
-                teacher={teacher}
-                id={id}
-              />
+            {visibleTeachers.map(teacher => (
+              <TeacherItem key={teacher.id} teacher={teacher} />
             ))}
           </ul>
           {isVisible && (
