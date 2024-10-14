@@ -8,8 +8,9 @@ import BookModal from '../BookModal/BookModal';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { toggleFavorite } from '../../redux/favorites/slice';
+// import { toggleFavorite } from '../../redux/favorites/slice';
 import { selectFavorites } from '../../redux/favorites/selectors';
+import { toggleFavorite } from '../../redux/favorites/operations';
 
 const TeacherItem = ({ teacher }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
