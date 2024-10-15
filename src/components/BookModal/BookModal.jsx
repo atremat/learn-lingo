@@ -4,9 +4,10 @@ import * as yup from 'yup';
 import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { bookTeacher } from '../../redux/teachers/operations';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
-const phoneNumberRegExp = /^\+?[\d\s\-]{7,15}$/;
+const phoneNumberRegExp = /^\+?[\d\s-]{7,15}$/;
 
 const bookSchema = yup.object({
   question: yup.string().required('Please select an option!'),
@@ -53,10 +54,9 @@ const BookModal = ({ modalClose, teacher }) => {
   });
 
   const onSubmit = data => {
-    console.log(data);
-
-    // dispatch(createParticipant({ ...data, eventId }));
+    dispatch(bookTeacher({ ...data, teacherID: teacher.id }));
     reset();
+    modalClose();
   };
 
   return (
