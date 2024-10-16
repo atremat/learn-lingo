@@ -11,7 +11,11 @@ const FavoritesPage = () => {
     <main className={styles.main}>
       <FiltersBar />
 
-      <TeachersList teachers={favoriteTeachers} />
+      {favoriteTeachers.length > 0 ? (
+        <TeachersList teachers={favoriteTeachers} />
+      ) : (
+        <p>No favorites yet.</p>
+      )}
     </main>
   );
 };

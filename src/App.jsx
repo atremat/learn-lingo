@@ -10,16 +10,23 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { auth } from './config/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
 import { fetchTeachers } from './redux/teachers/operations';
+import { fetchFavorites } from './redux/favorites/operations';
+import { selectIsLoggedIn } from './redux/auth/selectors';
 
 function App() {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(fetchTeachers());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [isLoggedIn, dispatch]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {

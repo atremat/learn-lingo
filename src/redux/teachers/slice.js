@@ -5,7 +5,6 @@ const teachersSlice = createSlice({
   name: 'teachers',
   initialState: {
     data: [],
-    favorites: [],
     loading: false,
     error: null,
   },

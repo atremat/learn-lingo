@@ -12,15 +12,17 @@ export const fetchFavorites = createAsyncThunk(
         return thunkAPI.rejectWithValue('User is not authenticated');
       }
 
-      const userRef = ref(database, 'users/' + user.uid);
+      const favoritesRef = ref(database, `users/${user.uid}/favorites`);
 
-      const snapshot = await get(userRef);
+      const snapshot = await get(favoritesRef);
 
       if (snapshot.exists()) {
-        const userData = snapshot.val();
-        return {
-          favorites: userData.favorites ? userData.favorites : [],
-        };
+        const favorites = JSON.parse(snapshot.val());
+        console.log(snapshot.val());
+
+        console.log(favorites);
+
+        return favorites ? favorites : [];
       } else {
         throw new Error('Something went wrong! Try login again.');
       }
