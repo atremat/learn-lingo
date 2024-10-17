@@ -15,6 +15,7 @@ import { refreshUser } from './redux/auth/operations';
 import { fetchTeachers } from './redux/teachers/operations';
 import { fetchFavorites } from './redux/favorites/operations';
 import { selectIsLoggedIn } from './redux/auth/selectors';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,12 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route
+            path="/favorites"
+            element={
+              <PrivateRoute redirectTo="/" component={<FavoritesPage />} />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer />

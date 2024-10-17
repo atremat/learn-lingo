@@ -18,10 +18,6 @@ export const fetchFavorites = createAsyncThunk(
 
       if (snapshot.exists()) {
         const favorites = JSON.parse(snapshot.val());
-        console.log(snapshot.val());
-
-        console.log(favorites);
-
         return favorites ? favorites : [];
       } else {
         throw new Error('Something went wrong! Try login again.');
