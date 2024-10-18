@@ -8,14 +8,13 @@ import BookModal from '../BookModal/BookModal';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-// import { toggleFavorite } from '../../redux/favorites/slice';
-import { selectFavorites } from '../../redux/favorites/selectors';
+import { selectFavoritesIds } from '../../redux/favorites/selectors';
 import { toggleFavorite } from '../../redux/favorites/operations';
 
 const TeacherItem = ({ teacher }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isExpanded, setIsExpanded] = useState(false);
-  const favoriteIndexes = useSelector(selectFavorites);
+  const favoriteIndexes = useSelector(selectFavoritesIds);
 
   const [isLiked, setLiked] = useState(favoriteIndexes.includes(teacher.id));
 
