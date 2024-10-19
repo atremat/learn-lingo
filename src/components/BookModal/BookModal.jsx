@@ -5,6 +5,7 @@ import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { bookTeacher } from '../../redux/teachers/operations';
+import { toast } from 'react-toastify';
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 const phoneNumberRegExp = /^\+?[\d\s-]{7,15}$/;
@@ -54,9 +55,22 @@ const BookModal = ({ modalClose, teacher }) => {
   });
 
   const onSubmit = data => {
-    dispatch(bookTeacher({ ...data, teacherID: teacher.id }));
-    reset();
-    modalClose();
+    dispatch(bookTeacher({ ...data, teacherID: teacher.id }))
+      .unwrap()
+      .then(() =>
+        toast.success('Booking request sent!', {
+          position: 'top-center',
+        })
+      )
+      .catch(() => {
+        toast.error('Error. Try again later.', {
+          position: 'top-center',
+        });
+      })
+      .finally(() => {
+        reset();
+        modalClose();
+      });
   };
 
   return (
