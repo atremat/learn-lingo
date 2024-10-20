@@ -15,9 +15,11 @@ const HeroSection = () => {
         highly qualified and experienced tutors.
       </p>
 
-      <NavLink to="/teachers" className={styles.link}>
-        Get started
-      </NavLink>
+      <div className={styles.linkWrapper}>
+        <NavLink to="/teachers" className={styles.link}>
+          Get started
+        </NavLink>
+      </div>
     </section>
   );
 };

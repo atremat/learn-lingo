@@ -3,6 +3,31 @@
 
 .heroWrapper {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 24px;
+}
+
+.image {
+  max-width: 320px;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+@media (min-width: 768px) {
+  .heroWrapper {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .image {
+    width: 300px;
+    max-width: unset;
+  }
+}
+
+@media (min-width: 1440px) {
+  .image {
+    width: 568px;
+  }
 }

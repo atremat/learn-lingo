@@ -7,8 +7,12 @@ const HomePage = () => {
   return (
     <main className={styles.main}>
       <div className={styles.heroWrapper}>
-        <HeroSection></HeroSection>
-        <img src={hero} alt="Happy user photo with laptop" />
+        <HeroSection />
+        <img
+          src={hero}
+          alt="Happy user photo with laptop"
+          className={styles.image}
+        />
       </div>
 
       <FeaturesSection />

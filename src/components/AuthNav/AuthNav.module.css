@@ -8,6 +8,7 @@
 }
 
 .loginText {
+  text-wrap: nowrap;
 }
 
 .registerButton {
