@@ -1,5 +1,12 @@
-.header {
+.mainWrapper {
   display: none;
+}
+
+.mainContainer {
+}
+
+.mobileWrapper {
+  margin: 20px 0;
 }
 
 @media (min-width: 768px) {
@@ -9,6 +16,10 @@
     padding: 0 32px;
     display: flex;
     justify-content: space-between;
+  }
+
+  .mainWrapper {
+    display: flex;
   }
 
   .mainContainer {

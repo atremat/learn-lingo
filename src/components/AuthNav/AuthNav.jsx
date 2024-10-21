@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Icon from '../Icon/Icon';
 import styles from './AuthNav.module.css';
 import logoutIcon from '/logout.svg';
 import ModalWindow from '../ModalWindow/ModalWindow';

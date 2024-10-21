@@ -5,6 +5,7 @@ import { AuthNav } from '../AuthNav/AuthNav';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import clsx from 'clsx';
+import MobileMenu from '../MobileMenu/MobileMenu';
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -15,28 +16,31 @@ const AppBar = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.mainContainer}>
-        <Link to="/" className={styles.logoContainer}>
-          <img src={flag} alt="Flag of Ukraine" className={styles.logo} />
-          <span className={styles.logoName}>LearnLingo</span>
-        </Link>
+      <div className={styles.mainWrapper}>
+        <div className={styles.mainContainer}>
+          <Link to="/" className={styles.logoContainer}>
+            <img src={flag} alt="Flag of Ukraine" className={styles.logo} />
+            <span className={styles.logoName}>LearnLingo</span>
+          </Link>
 
-        <nav className={styles.nav}>
-          <NavLink to="/" className={buildLinkClass}>
-            Home
-          </NavLink>
-          <NavLink to="/teachers" className={buildLinkClass}>
-            Teachers
-          </NavLink>
-          {isLoggedIn && (
-            <NavLink to="/favorites" className={buildLinkClass}>
-              Favorites
+          <nav className={styles.nav}>
+            <NavLink to="/" className={buildLinkClass}>
+              Home
             </NavLink>
-          )}
-        </nav>
-      </div>
+            <NavLink to="/teachers" className={buildLinkClass}>
+              Teachers
+            </NavLink>
+            {isLoggedIn && (
+              <NavLink to="/favorites" className={buildLinkClass}>
+                Favorites
+              </NavLink>
+            )}
+          </nav>
+        </div>
 
-      <AuthNav />
+        <AuthNav />
+      </div>
+      <MobileMenu />
     </header>
   );
 };

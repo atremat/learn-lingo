@@ -16,6 +16,9 @@ import { fetchTeachers } from './redux/teachers/operations';
 import { fetchFavorites } from './redux/favorites/operations';
 import { selectIsLoggedIn } from './redux/auth/selectors';
 import PrivateRoute from './components/PrivateRoute';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
   const dispatch = useDispatch();

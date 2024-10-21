@@ -3,8 +3,6 @@ import Icon from '../Icon/Icon';
 import style from './ModalWindow.module.css';
 import { useEffect } from 'react';
 
-Modal.setAppElement('#root');
-
 const ModalWindow = ({ modalIsOpen, onCloseModal, children }) => {
   useEffect(() => {
     document.body.classList.add(style.modalOpen);
