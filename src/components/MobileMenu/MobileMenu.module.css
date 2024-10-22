@@ -1,5 +1,5 @@
 .modalOpen {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .mobileWrapper {
@@ -50,6 +50,9 @@
 }
 
 @media (min-width: 768px) {
+  .modalOpen {
+    /* overflow: auto; */
+  }
   .mobileWrapper {
     display: none;
   }

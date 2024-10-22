@@ -1,13 +1,10 @@
 .item {
   border-radius: 24px;
   padding: 24px;
-  width: 1184px;
-  /* height: 328px; */
+  max-width: 320px;
   background: var(--white-color, white);
   padding: 24px;
   margin: 0 auto;
-  display: flex;
-  gap: 48px;
 }
 
 .circle {
@@ -19,6 +16,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  margin: 0 auto;
 }
 
 .avatar {
@@ -33,57 +31,27 @@
   right: 20px;
 }
 
-.container {
-  width: 968px;
-}
-
-.mainInfoWrapper {
-  width: 968px;
-  height: 56px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 32px;
-}
-
 .languagesText {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--gray-color, gray);
-  margin-bottom: 8px;
+  display: none;
 }
 
 .name {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  font-size: 24px;
+  /* font-family: 'Roboto', sans-serif;
+  font-weight: 500; */
+  font-size: 28px;
+  /* text-align: center;
   line-height: 1;
-  color: #121417;
+  color: #121417; */
 }
 
 .lessonsWrapper {
-  width: 697px;
-  height: 26px;
   display: flex;
-}
-
-.lessonsInfo {
-  width: 607px;
-  height: 24px;
-  margin-right: 64px;
-  display: flex;
-  gap: 32px;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .lessonsOnlineWrapper {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.bookImg {
-  width: 16px;
-  height: 16px;
+  display: none;
 }
 
 .lessonsText {
@@ -103,122 +71,217 @@
   margin-bottom: 16px;
 }
 
-.criterion {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--gray-color, gray);
-}
+@media (min-width: 768px) {
+  .item {
+    max-width: unset;
+    width: 1184px;
+    /*! Змінити на 768 */
+    display: flex;
+    gap: 48px;
+  }
 
-.criterionLang {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  color: var(--black-color, black);
-}
+  .circle {
+    margin: 0;
+  }
 
-.criterionText {
-  color: var(--black-color, black);
-}
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+  }
 
-.criterion:not(:last-child) {
-  margin-bottom: 8px;
-}
+  .onlineIcon {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+  }
 
-.readMoreBtn {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  color: var(--black-color, black);
-}
+  .container {
+    width: 968px;
+  }
 
-.levelsList {
-  margin-top: 32px;
-  display: flex;
-  gap: 8px;
-}
+  .mainInfoWrapper {
+    width: 968px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
 
-.levelsItem {
-  border-radius: 35px;
-  padding: 8px 12px;
-  border: 1px solid rgba(18, 20, 23, 0.2);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.14286;
-  color: var(--black-color, black);
-}
+  .languagesText {
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-color, gray);
+    margin-bottom: 8px;
+  }
 
-.levelsItem:first-child {
-  background: var(--primary-color, yellow);
-  border: none;
-}
+  .name {
+    font-size: 24px;
+    text-align: unset;
+  }
 
-.experienceText {
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--black-color, black);
-  margin-bottom: 32px;
-}
+  .lessonsWrapper {
+    width: 697px;
+    height: 26px;
+    justify-content: unset;
+    margin-bottom: 0;
+  }
 
-.reviewsList {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
+  .lessonsInfo {
+    width: 607px;
+    height: 24px;
+    margin-right: 64px;
+    display: flex;
+    gap: 32px;
+  }
 
-.reviewItem {
-}
+  .lessonsOnlineWrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 
-.iconReviewWrapper {
-  margin-bottom: 16px;
-  display: flex;
-  gap: 12px;
-}
+  .bookImg {
+    width: 16px;
+    height: 16px;
+  }
 
-.reviewAvatar {
-  width: 44px;
-  height: 44px;
-}
+  .lessonsText {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black-color, black);
+  }
 
-.iconReviewNameWrapper {
-}
+  .ratingWrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 
-.reviewName {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--gray-color);
-  margin-bottom: 2px;
-}
+  .teacherInfo {
+    margin-bottom: 16px;
+  }
 
-.reviewStarWrapper {
-  display: flex;
-  gap: 8px;
-}
+  .criterion {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-color, gray);
+  }
 
-.reviewText {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--black-color, black);
-}
+  .criterionLang {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: var(--black-color, black);
+  }
 
-.sad {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.28571;
-  color: var(--black-color, black);
-}
+  .criterionText {
+    color: var(--black-color, black);
+  }
 
-.bookBtn {
-  margin-top: 32px;
-  border-radius: 12px;
-  padding: 16px 48px;
+  .criterion:not(:last-child) {
+    margin-bottom: 8px;
+  }
 
-  background: var(--primary-color, yellow);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.55556;
-  color: var(--black-color, black);
+  .readMoreBtn {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: var(--black-color, black);
+  }
+
+  .levelsList {
+    margin-top: 32px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .levelsItem {
+    border-radius: 35px;
+    padding: 8px 12px;
+    border: 1px solid rgba(18, 20, 23, 0.2);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14286;
+    color: var(--black-color, black);
+  }
+
+  .levelsItem:first-child {
+    background: var(--primary-color, yellow);
+    border: none;
+  }
+
+  .experienceText {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black-color, black);
+    margin-bottom: 32px;
+  }
+
+  .reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .reviewItem {
+  }
+
+  .iconReviewWrapper {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .reviewAvatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .iconReviewNameWrapper {
+  }
+
+  .reviewName {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-color);
+    margin-bottom: 2px;
+  }
+
+  .reviewStarWrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  .reviewText {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black-color, black);
+  }
+
+  .sad {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    color: var(--black-color, black);
+  }
+
+  .bookBtn {
+    margin-top: 32px;
+    border-radius: 12px;
+    padding: 16px 48px;
+
+    background: var(--primary-color, yellow);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: var(--black-color, black);
+  }
 }

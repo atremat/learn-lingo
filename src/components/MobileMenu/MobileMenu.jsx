@@ -38,47 +38,49 @@ const MobileMenu = () => {
         />
       </button>
 
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        className={styles.modal}
-        overlayClassName={styles.overlay}
-        contentLabel="Mobile Menu"
-      >
-        <button className={styles.closeBtn} onClick={closeModal}>
-          <Icon id="close" width="32" height="32" />
-        </button>
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          className={styles.modal}
+          overlayClassName={styles.overlay}
+          contentLabel="Mobile Menu"
+        >
+          <button className={styles.closeBtn} onClick={closeModal}>
+            <Icon id="close" width="32" height="32" />
+          </button>
 
-        <nav className={styles.burgerNav}>
-          <ul className={styles.list}>
-            <li className={styles.item}>
-              <NavLink to="/" className={buildLinkClass} onClick={closeModal}>
-                Home
-              </NavLink>
-            </li>
-            <li className={styles.item}>
-              <NavLink
-                to="/teachers"
-                className={buildLinkClass}
-                onClick={closeModal}
-              >
-                Teachers
-              </NavLink>
-            </li>
-            {isLoggedIn && (
+          <nav className={styles.burgerNav}>
+            <ul className={styles.list}>
+              <li className={styles.item}>
+                <NavLink to="/" className={buildLinkClass} onClick={closeModal}>
+                  Home
+                </NavLink>
+              </li>
               <li className={styles.item}>
                 <NavLink
-                  to="/favorites"
+                  to="/teachers"
                   className={buildLinkClass}
                   onClick={closeModal}
                 >
-                  Favorites
+                  Teachers
                 </NavLink>
               </li>
-            )}
-          </ul>
-        </nav>
-      </Modal>
+              {isLoggedIn && (
+                <li className={styles.item}>
+                  <NavLink
+                    to="/favorites"
+                    className={buildLinkClass}
+                    onClick={closeModal}
+                  >
+                    Favorites
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </nav>
+        </Modal>
+      )}
     </div>
   );
 };

@@ -1,11 +1,11 @@
 .container {
-  width: 583px;
-  height: 74px;
-  margin: 0 64px 32px;
+  max-width: 320px;
+  margin: 0 8px 32px;
 }
 
 .list {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -33,4 +33,16 @@
   line-height: 1.11111;
   color: var(--black-color, black);
   border: none;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: unset;
+    width: 583px;
+    margin: 0 64px 32px;
+  }
+
+  .list {
+    flex-direction: row;
+  }
 }
