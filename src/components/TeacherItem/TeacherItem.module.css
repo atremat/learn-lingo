@@ -71,10 +71,132 @@
   margin-bottom: 16px;
 }
 
+.criterion {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray-color, gray);
+}
+
+.criterionLang {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--black-color, black);
+}
+
+.criterionText {
+  color: var(--black-color, black);
+}
+
+.criterion:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.readMoreBtn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--black-color, black);
+}
+
+.levelsList {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.levelsItem {
+  border-radius: 35px;
+  padding: 8px 12px;
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14286;
+  color: var(--black-color, black);
+}
+
+.levelsItem:first-child {
+  background: var(--primary-color, yellow);
+  border: none;
+}
+
+.experienceText {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black-color, black);
+  margin-bottom: 32px;
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.reviewItem {
+}
+
+.iconReviewWrapper {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.reviewAvatar {
+  width: 44px;
+  height: 44px;
+}
+
+.iconReviewNameWrapper {
+}
+
+.reviewName {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray-color);
+  margin-bottom: 2px;
+}
+
+.reviewStarWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.reviewText {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black-color, black);
+}
+
+.sad {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: var(--black-color, black);
+}
+
+.bookBtn {
+  width: 100%;
+  margin-top: 32px;
+  border-radius: 12px;
+  padding: 16px 48px;
+
+  background: var(--primary-color, yellow);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  color: var(--black-color, black);
+}
+
 @media (min-width: 768px) {
   .item {
     max-width: unset;
-    width: 1184px;
+    width: 704px;
     /*! Змінити на 768 */
     display: flex;
     gap: 48px;
@@ -165,123 +287,16 @@
     margin-bottom: 16px;
   }
 
-  .criterion {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--gray-color, gray);
-  }
-
-  .criterionLang {
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    color: var(--black-color, black);
-  }
-
-  .criterionText {
-    color: var(--black-color, black);
-  }
-
-  .criterion:not(:last-child) {
-    margin-bottom: 8px;
-  }
-
-  .readMoreBtn {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    color: var(--black-color, black);
-  }
-
   .levelsList {
-    margin-top: 32px;
-    display: flex;
-    gap: 8px;
-  }
-
-  .levelsItem {
-    border-radius: 35px;
-    padding: 8px 12px;
-    border: 1px solid rgba(18, 20, 23, 0.2);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.14286;
-    color: var(--black-color, black);
-  }
-
-  .levelsItem:first-child {
-    background: var(--primary-color, yellow);
-    border: none;
-  }
-
-  .experienceText {
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--black-color, black);
-    margin-bottom: 32px;
-  }
-
-  .reviewsList {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .reviewItem {
-  }
-
-  .iconReviewWrapper {
-    margin-bottom: 16px;
-    display: flex;
-    gap: 12px;
-  }
-
-  .reviewAvatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  .iconReviewNameWrapper {
-  }
-
-  .reviewName {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--gray-color);
-    margin-bottom: 2px;
-  }
-
-  .reviewStarWrapper {
-    display: flex;
-    gap: 8px;
-  }
-
-  .reviewText {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--black-color, black);
-  }
-
-  .sad {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.28571;
-    color: var(--black-color, black);
+    flex-direction: row;
   }
 
   .bookBtn {
-    margin-top: 32px;
-    border-radius: 12px;
-    padding: 16px 48px;
-
-    background: var(--primary-color, yellow);
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 1.55556;
-    color: var(--black-color, black);
+    width: unset;
+  }
+}
+@media (min-width: 1440px) {
+  .item {
+    width: 1184px;
   }
 }
