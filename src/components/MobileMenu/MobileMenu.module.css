@@ -6,6 +6,11 @@
   margin: 20px 0;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .modal {
   position: fixed;
   top: 0;

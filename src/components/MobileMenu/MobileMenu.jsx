@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { AuthNav } from '../AuthNav/AuthNav';
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,15 +29,19 @@ const MobileMenu = () => {
 
   return (
     <div className={styles.mobileWrapper}>
-      <button type="button" onClick={openModal} className={styles.burgerBtn}>
-        <Icon
-          id="burger"
-          width="32"
-          height="32"
-          className={styles.icon}
-          fillColor="#121417"
-        />
-      </button>
+      <div className={styles.wrapper}>
+        <button type="button" onClick={openModal} className={styles.burgerBtn}>
+          <Icon
+            id="burger"
+            width="32"
+            height="32"
+            className={styles.icon}
+            fillColor="#121417"
+          />
+        </button>
+
+        <AuthNav />
+      </div>
 
       {isOpen && (
         <Modal

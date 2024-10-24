@@ -26,8 +26,6 @@
   border-radius: 14px;
   padding: 14px 13px 14px 18px;
   background-color: var(--white-color, white);
-  /* width: 221px;
-  height: 48px; */
   font-weight: 500;
   font-size: 18px;
   line-height: 1.11111;
@@ -39,10 +37,15 @@
   .container {
     max-width: unset;
     width: 583px;
-    margin: 0 64px 32px;
   }
 
   .list {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    margin: 0 64px 32px;
   }
 }
