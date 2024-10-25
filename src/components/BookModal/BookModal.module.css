@@ -1,5 +1,7 @@
 .container {
-  width: 472px;
+  width: 268px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .title {
@@ -108,7 +110,7 @@
 
 .submitBtn {
   border-radius: 12px;
-  width: 472px;
+  width: 268px;
   height: 60px;
   background-color: var(--primary-color, gold);
   font-weight: 700;
@@ -129,4 +131,14 @@
 .emailWrapper,
 .dateWrapper {
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 472px;
+  }
+
+  .submitBtn {
+    width: 472px;
+  }
 }
