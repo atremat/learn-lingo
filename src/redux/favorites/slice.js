@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchFavorites, toggleFavorite } from './operations';
+import { logoutUser } from '../auth/operations';
 
 const handlePending = state => {
   state.loading = true;
@@ -11,13 +12,15 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const favoritesInitialState = {
+  items: [],
+  loading: false,
+  error: null,
+};
+
 const favoritesSlice = createSlice({
   name: 'favorites',
-  initialState: {
-    items: [],
-    loading: false,
-    error: null,
-  },
+  initialState: favoritesInitialState,
   reducers: {
     setFavorites: (state, action) => {
       state.items = action.payload;
@@ -38,7 +41,9 @@ const favoritesSlice = createSlice({
         state.items = action.payload;
         state.loading = false;
       })
-      .addCase(toggleFavorite.rejected, handleRejected);
+      .addCase(toggleFavorite.rejected, handleRejected)
+      //logout
+      .addCase(logoutUser.fulfilled, () => favoritesInitialState);
   },
 });
 

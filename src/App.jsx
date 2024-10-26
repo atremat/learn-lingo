@@ -12,25 +12,16 @@ import { useEffect } from 'react';
 import { auth } from './config/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
-import { fetchTeachers } from './redux/teachers/operations';
-import { fetchFavorites } from './redux/favorites/operations';
-import { selectIsLoggedIn } from './redux/auth/selectors';
+import { selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/PrivateRoute';
 import Modal from 'react-modal';
+import Loader from './components/Loader/Loader';
 
 Modal.setAppElement('#root');
 
 function App() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  }, [isLoggedIn, dispatch]);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -42,7 +33,9 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <>
       <Layout>
         <Routes>

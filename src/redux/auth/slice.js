@@ -16,6 +16,7 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     isLoggedIn: false,
+    isRefreshing: false,
     loading: false,
     error: null,
   },
@@ -50,13 +51,18 @@ const authSlice = createSlice({
         state.error = action.payload || 'Failed to log out';
       })
       //refresh
-      .addCase(refreshUser.pending, handlePending)
+      .addCase(refreshUser.pending, state => {
+        state.isRefreshing = true;
+      })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.loading = false;
+        state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, handleRejected);
+      .addCase(refreshUser.rejected, state => {
+        state.isRefreshing = false;
+      });
   },
 });
 

@@ -23,7 +23,7 @@ const MobileNav = ({ isOpen, closeModal }) => {
   };
 
   return (
-    <div>
+    <>
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
@@ -65,7 +65,7 @@ const MobileNav = ({ isOpen, closeModal }) => {
           </ul>
         </nav>
       </Modal>
-    </div>
+    </>
   );
 };
 
