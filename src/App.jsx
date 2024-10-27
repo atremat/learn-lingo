@@ -1,14 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import 'modern-normalize';
 import './App.css';
-import HomePage from './pages/HomePage/HomePage';
-import TeachersPage from './pages/TeachersPage/TeachersPage';
-import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 import Layout from './components/Layout/Layout';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { auth } from './config/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from './redux/auth/operations';
@@ -16,6 +12,11 @@ import { selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/PrivateRoute';
 import Modal from 'react-modal';
 import Loader from './components/Loader/Loader';
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const TeachersPage = lazy(() => import('./pages/TeachersPage/TeachersPage'));
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage/FavoritesPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 Modal.setAppElement('#root');
 
@@ -36,8 +37,8 @@ function App() {
   return isRefreshing ? (
     <Loader />
   ) : (
-    <>
-      <Layout>
+    <Layout>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
@@ -49,9 +50,10 @@ function App() {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        <ToastContainer />
-      </Layout>
-    </>
+      </Suspense>
+
+      <ToastContainer />
+    </Layout>
   );
 }
 
