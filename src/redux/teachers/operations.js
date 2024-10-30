@@ -1,5 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ref, get, set } from 'firebase/database';
+import {
+  ref,
+  get,
+  set,
+  query,
+  orderByKey,
+  startAfter,
+  limitToFirst,
+} from 'firebase/database';
 import { auth, database } from '../../config/firebase';
 
 export const fetchTeachers = createAsyncThunk(
@@ -38,6 +46,40 @@ export const bookTeacher = createAsyncThunk(
         teacherID,
         createdAt: new Date().toISOString(),
       });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchTeachersPaginated = createAsyncThunk(
+  'teachers/fetchTeachersPaginated',
+  async ({ lastKey = null }, thunkAPI) => {
+    try {
+      const teachersRef = ref(database, 'teachers');
+
+      const teachersQuery = lastKey
+        ? query(teachersRef, orderByKey(), startAfter(lastKey), limitToFirst(4))
+        : query(teachersRef, orderByKey(), limitToFirst(4));
+
+      const snapshot = await get(teachersQuery);
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const teachersArray = Object.keys(data).map(id => ({
+          id,
+          ...data[id],
+        }));
+        const result = {
+          teachers: teachersArray,
+          lastKey: teachersArray[teachersArray.length - 1]?.id || null,
+        };
+        console.log('result: ', result);
+
+        return result;
+      } else {
+        return thunkAPI.rejectWithValue('No data available');
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
